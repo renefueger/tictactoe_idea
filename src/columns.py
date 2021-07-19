@@ -13,4 +13,4 @@ class Columns:
 
     @staticmethod
     def create(board_representation: Fields):
-        return Columns(list(map(lambda column_number: Column.create(board_representation, column_number), range(2))))
+        return Columns(list(map(lambda column_number: Column.create(board_representation, column_number), range(3))))

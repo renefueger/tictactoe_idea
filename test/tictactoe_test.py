@@ -1,3 +1,5 @@
+import pytest
+
 from board_creator import BoardCreator
 from finished_game import FinishedGame
 from is_board_full_rule import IsBoardFullRule
@@ -25,16 +27,20 @@ class TestTicTacToe:
         ])
         assert isinstance(self.game.apply_rules(board), RunningGame)
 
-    def test_running_game_applying_rules_on_not_finished_board_returns_running_game(self):
-        board = BoardCreator.create([
-            '___',
-            '_xo',
-            '_x_'
-        ])
+    @pytest.mark.parametrize('rows', [['___',
+                                       '_xo',
+                                       '_x_'
+                                       ],
+                                      ['_x_',
+                                       '_xo',
+                                       '___'
+                                       ]
+                                      ])
+    def test_running_game_applying_rules_on_not_finished_board_returns_running_game(self, rows):
+        board = BoardCreator.create(rows)
         assert isinstance(self.game.apply_rules(board), RunningGame)
 
     def test_running_game_applying_rules_on_full_board_returns_finished_game(self):
-
         board = BoardCreator.create([
             'oxo',
             'xox',
@@ -42,20 +48,30 @@ class TestTicTacToe:
         ])
         assert isinstance(self.game.apply_rules(board), FinishedGame)
 
-    def test_running_game_applying_rules_on_row_board_returns_finished_game(self):
-        board = BoardCreator.create([
-            '___',
-            'xxx',
-            '___'
-        ])
+    @pytest.mark.parametrize('rows', [['___',
+                                       'xxx',
+                                       '___'],
+                                      ['ooo',
+                                       '___',
+                                       '___'],
+                                      ['___',
+                                       '___',
+                                       'xxx']])
+    def test_running_game_applying_rules_on_row_board_returns_finished_game(self, rows):
+        board = BoardCreator.create(rows)
         assert isinstance(self.game.apply_rules(board), FinishedGame)
 
-    def test_running_game_applying_rules_on_column_board_returns_finished_game(self):
-        board = BoardCreator.create([
-            '_x_',
-            '_x_',
-            '_x_'
-        ])
+    @pytest.mark.parametrize('rows', [['_x_',
+                                       '_x_',
+                                       '_x_'],
+                                      ['x__',
+                                       'x__',
+                                       'x__'],
+                                      ['__o',
+                                       '__o',
+                                       '__o']])
+    def test_running_game_applying_rules_on_column_board_returns_finished_game(self, rows):
+        board = BoardCreator.create(rows)
         assert isinstance(self.game.apply_rules(board), FinishedGame)
 
     def test_running_game_applying_rules_on_diagonal1_board_returns_finished_game(self):
