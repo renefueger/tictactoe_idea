@@ -4,7 +4,7 @@ from rule import Rule
 
 
 class Rules:
-    def __init__(self, rules: [Rule]):
+    def __init__(self, rules: list[Rule]):
         self.rules = rules
 
     def apply(self, game: Game, board: Board):

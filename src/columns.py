@@ -2,11 +2,12 @@ from dataclasses import dataclass
 
 from column import Column
 from fields import Fields
+from typing import Optional
 
 
 @dataclass
 class Columns:
-    _columns: [Column]
+    _columns: list[Column]
 
     def __iter__(self):
         yield from self._columns

@@ -6,7 +6,7 @@ from fields import Fields
 
 @dataclass
 class Diagonals:
-    _diagonals: [Diagonal]
+    _diagonals: list[Diagonal]
 
     def __iter__(self):
         yield from self._diagonals

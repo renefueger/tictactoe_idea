@@ -10,4 +10,4 @@ class OccupiedField(Field):
 
     @property
     def player(self) -> Player:
-        return self._player;
+        return self._player

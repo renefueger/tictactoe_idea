@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from field_container import FieldContainer
 from fields import Fields
 
-
 @dataclass
 class Column(FieldContainer):
     @staticmethod
