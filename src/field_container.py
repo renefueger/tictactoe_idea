@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from fields import Fields
+from players import Players
 
 
 @dataclass
@@ -20,9 +21,9 @@ class FieldContainer:
         return self._fields.unoccupied
 
     @property
-    def players(self):
+    def players(self) -> Players:
         return self._fields.players
 
     @property
-    def unique_players(self):
+    def unique_players(self) -> Players:
         return self._fields.unique_players

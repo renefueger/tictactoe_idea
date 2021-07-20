@@ -1,4 +1,7 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
+from typing import List, Collection
 
 from field import Field
 from occupied_field import OccupiedField
@@ -10,7 +13,7 @@ from unoccupied_field import UnoccupiedField
 
 @dataclass
 class Fields:
-    _fields: [Field]
+    _fields: Collection[Field]
 
     def __iter__(self):
         yield from self._fields
@@ -19,17 +22,17 @@ class Fields:
         return len(self._fields)
 
     @property
-    def occupied(self):
-        return Fields(self.of_type(OccupiedField))
+    def occupied(self) -> Fields:
+        return Fields(self._of_type(OccupiedField))
 
     @property
-    def unoccupied(self):
-        return Fields(self.of_type(UnoccupiedField))
+    def unoccupied(self) -> Fields:
+        return Fields(self._of_type(UnoccupiedField))
 
-    def of_type(self, the_type: type):
+    def _of_type(self, the_type: type) -> Collection[Field]:
         return list(filter(lambda field: isinstance(field, the_type), self._fields))
 
-    def occupied_by(self, player: Player):
+    def occupied_by(self, player: Player) -> Fields:
         return Fields(list(filter(lambda field: field.player == player, self._fields)))
 
     @property
@@ -40,11 +43,11 @@ class Fields:
     def unique_players(self) -> Players:
         return self.players.unique
 
-    def with_row(self, row_number: int):
+    def with_row(self, row_number: int) -> Fields:
         return Fields(list(filter(lambda field: field.position.y == row_number, self._fields)))
 
-    def with_column(self, column_number: int):
+    def with_column(self, column_number: int) -> Fields:
         return Fields(list(filter(lambda field: field.position.x == column_number, self._fields)))
 
-    def with_positions(self, positions: [Position]):
+    def with_positions(self, positions: Collection[Position]) -> Fields:
         return Fields(list(filter(lambda field: field.position in positions, self._fields)))

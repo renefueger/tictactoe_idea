@@ -1,11 +1,14 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
+from typing import Collection
 
 from player import Player
 
 
 @dataclass
 class Players:
-    _players: [Player]
+    _players: Collection[Player]
 
     def __iter__(self):
         yield from self._players
@@ -14,5 +17,5 @@ class Players:
         return len(self._players)
 
     @property
-    def unique(self):
+    def unique(self) -> Players:
         return Players(set(self._players))

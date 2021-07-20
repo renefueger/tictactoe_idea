@@ -4,4 +4,4 @@ from game import Game
 
 class Rule:
     def apply(self, original_game: Game, board: Board) -> Game:
-        raise(NotImplementedError)
+        raise NotImplementedError
